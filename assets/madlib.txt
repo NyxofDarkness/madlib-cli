@@ -1,0 +1,25 @@
+******************************************************
+******************************************************
+        Here is your personal Madlib!
+                ***   ***
+               ***** *****
+              *************
+              *************
+               ***********
+                *********
+                 *******
+                  *****
+                   ***
+                    *
+               Hello {name}. 
+           You've been chosen!
+   Please read these instruction thoroughly.
+        You are warned not to stray. 
+  Please {adverb} go to your {noun} and {verb} 
+      all the {adjective} {noun}. 
+Bring them to the top secret base located in {noun}. 
+   There you will see a {adjective}{color}{noun}. 
+{verb} the items you have brought and exclaim 
+             {exclaimation}. 
+Say {exclaimation}  {number}  times and go home.
+ We will reach out to you on a later date.
