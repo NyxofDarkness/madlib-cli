@@ -15,6 +15,6 @@ Change Log
 
 [PR Link]()
 
+![WhiteBoard](assets/whiteboard.png)
 
-Collaborations
-[Here is a cool tutorial anout input-output fiels in python!](https://www.softwaretestinghelp.com/python/input-output-python-files/#:~:text=close%20file-,%231)%20Open%20a%20File,read%20or%20modify%20the%20file.&text=We%20can%20even%20specify%20the,read%2C%20write%20or%20append%20etc.)
+Collaborators
