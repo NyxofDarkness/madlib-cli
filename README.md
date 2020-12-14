@@ -13,7 +13,7 @@ Change Log
 1.2: Created tests functions with passing results - 12/13/2020
 1.3: creates file with results - 12/13/2020
 
-[PR Link]()
+[PR Link](https://github.com/NyxofDarkness/madlib-cli/pull/1)
 
 ![WhiteBoard](assets/whiteboard.png)
 
