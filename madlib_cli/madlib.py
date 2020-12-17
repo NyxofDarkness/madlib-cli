@@ -1,95 +1,83 @@
-print("""
-****************************************************
-**                                                **
-***                   Welcome!                   ***
-****           Today is a Day for fun!          ****
-*****        Choose a word that meets the      *****
-****           prompt and press enter!          ****
-***                     ***                      ***
-**                At the end you get              **
-**              a fantastical adventure!          **
-**                                                **
-****************************************************
-** adjective: describes something                 **
-**                                                **
-** adverb: describes an action                    **
-**                                                **
-** noun: person place or thing                    **
-**                                                **
-** verb: An action                                **
-**                                                **
-** exclaimation: (Wow!, Oh!, Yuck!)               **
-** number: a number!                              **
-** color: any color!                              **
-****************************************************
-****************************************************
-""")
+# import re 
 
-name = input('Please enter a name! =>')
-adverb_a = input('Enter an adverb =>')
-noun_a = input('Enter a noun =>')
-verb_a = input('Enter a verb =>')
-adjective_a = input('Enter an adjective =>')
-noun_b = input('Enter a noun =>')
-noun_c = input('Enter another noun please! =>')
-adjective_b = input('Enter an adjective =>')
-color = input('Enter a color =>')
-noun_d = input('Enter a noun =>')
-verb_b = input('Enter a verb =>')
-exclaim = input('Enter an exclaimation! (i.e. Wow! Oh! Yuck!) =>')
-number = input('Enter a number =>')
+def read_template(path):
+    with open(path) as file:
+        string = file.read()
+        return string
 
-with open('assets/madlib.txt', 'r') as file:
-    madlib = file.read()
+def parse_template(string):
+    """this goes through the template looking for strings of {...} replaceing this first string with a temp on made up of user coices.
 
-    madlib = madlib.replace('{name}', name, 1)
-    madlib = madlib.replace('{adverb}', adverb_a, 1)
-    madlib = madlib.replace('{noun}', noun_a, 1)
-    madlib = madlib.replace('{verb}', verb_a, 1)
-    madlib = madlib.replace('{adjective}', adjective_a, 1)
-    madlib = madlib.replace('{noun}', noun_b, 1)
-    madlib = madlib.replace('{noun}', noun_c, 1)
-    madlib = madlib.replace('{adjective}', adjective_b, 1)
-    madlib = madlib.replace('{color}', color, 1)
-    madlib = madlib.replace('{noun}', noun_d, 1)
-    madlib = madlib.replace('{verb}', verb_b, 1)
-    madlib = madlib.replace('{exclaimation}', exclaim, 1)
-    madlib = madlib.replace('{exclaimation}', exclaim, 1)
-    madlib = madlib.replace('{number}', number, 1)
+    Args:
+        file strg, s_strg
+    """
+    count = 0
+    list1 = []
+    for character in string:
+        count = count + 1
+        if character == "{":
+            end = string.find("}", count)
+            s_strg = string[count:end]
+            list1.append(s_strg)
+            string = string.replace(s_strg, "", 1)
+            count = count - len(s_strg)
 
-    print(madlib)
+    subs = tuple(list1)
 
-with open('assets/result.txt', 'wt') as result:
-    result.write(madlib)
+    return(string, subs)
+    print(subs)
 
-import re
+def merge(string, user_tuple):
+    madlib = string.format(*user_tuple)
+    return madlib
 
-def read_template(i):
-    with open(i) as text:
-        madlib_read = text.read()
-        return madlib_read
+def write_madlib(string):
+    with open("madlib.txt", "wt") as file:
+        file.write(string)
 
-def parse_template(file):
-    new_file = tuple(re.findall(r"\{([A-Za-z0-9 '_]+)\}", txt))
-    new_madlib = file.replace(personal_mad[0], "")
-    new_madlib = new_file.replace(personal_mad[2], "")
-    return(new_file, personal_mad)
+def main():
+    print("""
+    ****************************************************
+    **                                                **
+    ***                   Welcome!                   ***
+    ****           Today is a Day for fun!          ****
+    *****        Choose a word that meets the      *****
+    ****           prompt and press enter!          ****
+    ***                     ***                      ***
+    **                At the end you get              **
+    **              a fantastical adventure!          **
+    **                                                **
+    ****************************************************
+    ** adjective: describes something                 **
+    **                                                **
+    ** adverb: describes an action                    **
+    **                                                **
+    ** noun: person place or thing                    **
+    **                                                **
+    ** verb: An action                                **
+    **                                                **
+    ** exclaimation: (Wow!, Oh!, Yuck!)               **
+    ** number: a number!                              **
+    ** color: any color!                              **
+    ****************************************************
+    ****************************************************
+    """)
 
-def merge(file_1, file_2):
-    these_are_mad = file_1.format(file_2[0], file_2[1], file_3[2])
-    print(these_are_mad)
-    return these_are_mad
-# print('is the file closed?', file.closed)
+    raw_template = read_template('assets/madlib.txt')
+    no_words, input_things = parse_template(raw_template)
 
-# madlib = open('assets/madlib.txt')
-# list(madlib)
-# for i in madlib:
+    list1 = []
+    for things in input_things:
+        user_input = input(f"Enter a... {things.lower()}: ")
+        list1.append(user_input)
 
-# print(madlib)
+    inputs = tuple(list1)
 
-# with open('assets/madlib.txt') as reader:
-#     line = reader.readline()
-#     while line != '':
+    user_madlib = merge(no_words, inputs)
+    print(f"Here is your adventure...\n{user_madlib}")
 
-#         print(line, end = '')
-#         line = reader.readline()
+    write_madlib(user_madlib)
+
+if __name__ == "__main__":
+    main()
+
